@@ -13,11 +13,10 @@ class Player():
         self.str = None
         self.dex = None
         self.wis = None
-        self.dmg = None
         self.items = []
         self.weapons = []
         self.armors = []
-            
+           
     def status(self):
         print(self.name)
         print("X:",self.pos_x)
@@ -28,7 +27,6 @@ class Player():
         print("Strength:",self.str)
         print("Dexterity", self.dex)
         print("Wisdom:",self.wis)
-        print("Damage:",self.dmg)
         print("Items in inventory:")
         print(*self.items, sep="\n")
         print("Weapons in inventory:")
@@ -68,11 +66,12 @@ class Player():
             if (self.name == None) or (self.hp == 0):
                 print("Please finish creating your character...") 
                 self.create() 
-
+            
+        else: 
+            print("Not a valid choice! Please enter N, R or P")
+            self.create()
     
     def user_input(self):
         user_input = input(">>>:").upper()
         return user_input
 
-player = Player()
-player.create()
