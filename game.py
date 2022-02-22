@@ -10,16 +10,38 @@ class Game():
         for room in rooms:
             if (player.pos_x == room.pos_x) and (player.pos_y == room.pos_y):
                 room.status()
-        
+    
+    def options(self,player):
+        print("MOVE N, S, E, W")
+        dir = player.user_input()
+        if dir == "N":
+            player.pos_y += 1
+        elif dir == "S":
+            player.pos_y -= 1
+        elif dir == "W":
+            player.pos_x -= 1
+        elif dir == "E":
+            player.pos_x += 1
+        else:
+            print("INVALID CHOICE")
+        return
+    
+    def main_loop(self,player):
+        self.status()
+        while True:
+            self.grid(player)
+            player.status()
+            self.options(player)
 
 class Player():
     def __init__(self):
         self.name = "PLAYER"
         self.pos_x = 0
-        self.pos_y = 1
+        self.pos_y = 0
     
     def status(self):
-        print(self.name, " X:",self.pos_x)
+        print(self.name)
+        print("X:",self.pos_x)
         print("Y:" , self.pos_y)
     
     def user_input(self):
@@ -43,4 +65,4 @@ player = Player()
 start_room = Room("start room","This is the starting room",0,0)
 empty_room = Room("empty room","This is an empty room",0,1)
 
-game.grid(player)
+game.main_loop(player)
