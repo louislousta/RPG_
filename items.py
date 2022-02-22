@@ -14,7 +14,9 @@ class Item(): # name, damage, armor, price, weight
         print("Armour rating: {}".format(self.ar_value))
         print("Value: {} GP".format(self.gp_value))
         print("Weight: {}".format(self.weight))
-    
+
+teeth = Item("Sharp Teeth",1,0,0,0)
+boots = Item("Leather Boots",0,2,15,1)
 short_sword = Item("Short Sword",random.randint(3,6),0,50,6)
 leather_whip = Item("Leather Whip",random.randint(2,4),0,25,1)
 leather_breastplate = Item("Leather Breastplate",0,random.randint(4,8),35,6)

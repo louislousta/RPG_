@@ -31,11 +31,17 @@ class Room():
             print(enemy.name)
 
 ###    name , desc , x, y, items, weapons, armor, npcs, enemies
-start_room = Room("Starting Room","""
-This is the room you started in, i will fill this with stuff later
-""",0,0,[ruby],[leather_whip,short_sword],[leather_breastplate],[friendly_wizard],[])
-goblin_room = Room("Goblin room","""
-A room full of goblins""",1,0,[],[],[],[],[baby_goblin,baby_goblin,baby_goblin])
-treasure_room = Room("Treasure Room","""
-A room full of rubies""",0,1,[ruby,ruby,ruby],[],[],[],[])
+start_room = Room("Old Stable","""
+A wooden stable. You woke up here. There is a mule in the corner eating hay, 
+and a bloodstain on the floor where you were lying. The door is to the north.  
+""",0,0,[],[],[],[mule],[])
+courtyard = Room("Tavern Courtyard","""
+The courtyard of a tavern. The yard is paved with cobbles and filthy with mud. To the east
+lies the tavern itself, where you can here the sounds of drinking and merriment. 
+To the north is a high stone wall, green with moss and ivy. 
+To the west lies the open road. 
+To the south is the stable where you woke up. A short sword is propped up against the wall, 
+probably left there by one of the patrons of the tavern""",0,1,[],[short_sword],[],[],[])
+
+
 

@@ -42,5 +42,6 @@ class Character():
         roll = random.randint(0,die)
         print("{} rolls: {}".format(self.name,roll))
     # Character - name,x,y,level,hp,str,dex,wis,gp,xp,items,weapons,armors,dialog
+mule = Character("Old Mule",0,0,1,2,4,1,0,0,2,[],[teeth],[boots],"Hee-Haw")
 baby_goblin = Character("Baby Goblin",0,0,1,4,2,1,0,5,3,[ruby],[short_sword],[leather_breastplate],"Eeek! Don't hurt me!")   
 friendly_wizard = Character("Friendly Wizard",0,0,10,200,15,15,200,100,150,[],[wizards_staff],[cloth_robes],"Hello, I'm a friendly wizard")
