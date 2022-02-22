@@ -35,6 +35,7 @@ start_room = Room("Old Stable","""
 A wooden stable. You woke up here. There is a mule in the corner eating hay, 
 and a bloodstain on the floor where you were lying. The door is to the north.  
 """,0,0,[],[],[],[mule],[])
+
 courtyard = Room("Tavern Courtyard","""
 The courtyard of a tavern. The yard is paved with cobbles and filthy with mud. To the east
 lies the tavern itself, where you can here the sounds of drinking and merriment. 

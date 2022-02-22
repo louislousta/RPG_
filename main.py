@@ -11,13 +11,14 @@ class Game():
     
     def grid(self,player):
         print("INSTANTIATE GRID")
-        rooms = [start_room,courtyard]
         for room in rooms:
             if (player.pos_x == room.pos_x) and (player.pos_y == room.pos_y):
                 room.status()
+                return rooms.index(room)
+        print("You can't go that direction!")                 
   
     def move(self,player):
-        print("MOVE N, S, E, W")
+        print("MOVE N, S, E, W. Press X to cancel")
         dir = player.user_input()
         if dir == "N":
             player.pos_y += 1
@@ -27,13 +28,24 @@ class Game():
             player.pos_x -= 1
         elif dir == "E":
             player.pos_x += 1
+        elif dir == "X":
+            self.options(player)
         else:
             print("INVALID CHOICE")
-        return
+            self.move(player)
+        
     def look(self,player):
         pass
     def talk(self,player):
-        pass
+        print("Choose who to talk to:")
+        count = 1
+        dict = {}
+        for npc in rooms[current_room].npcs:
+            print(count,":",npc.name)
+            dict[count] = npc
+            count+=1
+        choice = int(player.user_input())
+        print(f"{dict[choice].name} says {dict[choice].dialog}")
     def options(self,player):
         opt = player.user_input()
         if opt == "M":
@@ -50,9 +62,9 @@ class Game():
 
     def main_loop(self,player):
         self.status()
-        player.create()
+       # player.create()
         while True:
-            self.grid(player)
+            current_room = self.grid(player)            
             player.status()
             self.options(player)
 help = {"Move":"M","Look":"L","Talk":"T","Help":"H"}
@@ -63,8 +75,8 @@ You summon your strength and push yourself to your feet, swaying gently.
 Looking around as the fog clears from your eyes you see you are in a stable,
 with thick wooden walls and straw underfoot. An old grey mule 
 observes you briefly from a corner, then goes back to eating hay. """)
-
-
+current_room = 0 # index of rooms list where the player is standing
+rooms = [start_room,courtyard]
 game = Game()
 player = Player()
 print(intro_text)
