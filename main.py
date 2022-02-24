@@ -57,10 +57,13 @@ class Game():
             chosen = dict[choice]
             if chosen in rooms[self.current_room].items:
                 player.items.append(chosen)
+                rooms[self.current_room].items.remove(chosen)
             elif chosen in rooms[self.current_room].weapons:
                 player.weapons.append(chosen)
+                rooms[self.current_room].weapons.remove(chosen)
             elif chosen in rooms[self.current_room].armors:
                 player.armors.append(chosen)
+                rooms[self.current_room].armors.remove(chosen)
     def look(self,player):
         pass
     def talk(self,player):
