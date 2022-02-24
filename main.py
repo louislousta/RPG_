@@ -6,6 +6,8 @@ from room import *
 class Game():
     def __init__(self):
         self.name = "GAME "
+        self.current_room = 0
+        self.move_history = []
     def status(self):
         print(self.name + "IS INSTANTIATED")
     
@@ -13,8 +15,10 @@ class Game():
         print("INSTANTIATE GRID")
         for room in rooms:
             if (player.pos_x == room.pos_x) and (player.pos_y == room.pos_y):
-                room.status()                
-        print("You can't go that direction!")                 
+                room.status()
+                self.current_room = rooms.index(room)             
+        print("You can't go that direction!") 
+
   
     def move(self,player):
         print("MOVE N, S, E, W. Press X to cancel")
@@ -36,26 +40,26 @@ class Game():
         print("Choose an item to pick up:")
         count = 1
         dict = {}
-        for item in rooms[current_room].items:
+        for item in rooms[self.current_room].items:
             print(count,":",item.name)
             dict[count] = item
             count += 1
-        for weapon in rooms[current_room].weapons:
+        for weapon in rooms[self.current_room].weapons:
             print(count,":",weapon.name)
             dict[count] = weapon
             count += 1
-        for armor in rooms[current_room].armors:
+        for armor in rooms[self.current_room].armors:
             print(count,":",armor.name)
             dict[count] = armor
             count += 1
         choice = player.user_input(num=True)
         if choice in dict:
             chosen = dict[choice]
-            if chosen in rooms[current_room].items:
+            if chosen in rooms[self.current_room].items:
                 player.items.append(chosen)
-            elif chosen in rooms[current_room].weapons:
+            elif chosen in rooms[self.current_room].weapons:
                 player.weapons.append(chosen)
-            elif chosen in rooms[current_room].armors:
+            elif chosen in rooms[self.current_room].armors:
                 player.armors.append(chosen)
     def look(self,player):
         pass
@@ -63,7 +67,7 @@ class Game():
         print("Choose who to talk to:")
         count = 1
         dict = {}
-        for npc in rooms[current_room].npcs:
+        for npc in rooms[self.current_room].npcs:
             print(count,":",npc.name)
             dict[count] = npc
             count+=1
@@ -104,7 +108,7 @@ You summon your strength and push yourself to your feet, swaying gently.
 Looking around as the fog clears from your eyes you see you are in a stable,
 with thick wooden walls and straw underfoot. An old grey mule 
 observes you briefly from a corner, then goes back to eating hay. """)
-current_room = 0
+
 rooms = [start_room,courtyard]
 game = Game()
 player = Player()

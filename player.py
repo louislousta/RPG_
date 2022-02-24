@@ -28,11 +28,14 @@ class Player():
         print("Dexterity", self.dex)
         print("Wisdom:",self.wis)
         print("Items in inventory:")
-        print(*self.items, sep="\n")
+        for item in self.items:
+            print(item.name)
         print("Weapons in inventory:")
-        print(*self.weapons, sep="\n")
+        for weapon in self.weapons:
+            print(weapon.name)        
         print("Armor in inventory:")
-        print(*self.armors, sep="\n")
+        for armor in self.armors:
+            print(armor.name)
 
     def roll_die(self,die):
         roll = random.randint(1,die)
