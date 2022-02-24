@@ -47,7 +47,7 @@ class Player():
         choice = self.user_input()
         if choice == "N":
             print("Enter your name:")
-            self.name = self.user_input()
+            self.name = self.user_input(char=False)
             self.create()
         elif choice == "R":
             print("Rolling {}'s stats".format(self.name))
@@ -71,7 +71,17 @@ class Player():
             print("Not a valid choice! Please enter N, R or P")
             self.create()
     
-    def user_input(self):
+    def user_input(self, char=True, num=False):
         user_input = input(">>>:").upper()
-        return user_input
+        if num:
+            try:
+                user_input = int(user_input)
+            except ValueError:
+                print("Not a valid choice!")
+            return user_input
+        if char:
+            return user_input[0]
+        else:
+            return user_input
+
 
