@@ -23,12 +23,11 @@ class Lootbox():
         self.armors = []
         self.flavor_text = flavor_text
 
-#######-------------Lootboxes (searchable)------------------------
-manure_pile = Lootbox("Pile of Manure",[],[],[boots],"Grimacing, you reach in and check if anything is inside")
-wood_chest = Lootbox("Wooden Chest",[],[weapon_list[random.randint(0,1)]],[armor_list[random.randint(0,3)]],"""
-The hinges creak as you lift open the lid""")
+
 
 #######--------------Items----------------
+fist = Item("Fists",1,0,0,0)
+cloth_shirt = Item("Cloth Shirt",0,2,3,0.2)
 teeth = Item("Sharp Teeth",1,0,0,0)
 rat_tail = Item("Rat Tail",0,0,6,0.1)
 boots = Item("Leather Boots",0,2,15,1)
@@ -42,3 +41,8 @@ cloth_robes = Item("Cloth Robes",0,random.randint(1,3),15,1)
 ruby = Item("Ruby",0,0,75,0.1)
 weapon_list = [short_sword,leather_whip]
 armor_list = [cloth_robes,leather_breastplate,boots,leather_pants]
+
+#######-------------Lootboxes (searchable)------------------------
+manure_pile = Lootbox("Pile of Manure",[],[],[boots],"Grimacing, you reach in and check if anything is inside")
+wood_chest = Lootbox("Wooden Chest",[],[weapon_list[random.randint(0,1)]],[armor_list[random.randint(0,3)]],"""
+The hinges creak as you lift open the lid""")

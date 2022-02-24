@@ -13,10 +13,17 @@ class Player():
         self.str = None
         self.dex = None
         self.wis = None
+        self.xp = 0
+        self.gp = 0
         self.items = []
-        self.weapons = []
-        self.armors = []
-           
+        self.weapons = [fist]
+        self.armors = [cloth_shirt]
+        self.dmg = self.weapons[0].dmg_value
+        self.ar = self.armors[0].ar_value
+
+    
+
+
     def status(self):
         print(self.name)
         print("X:",self.pos_x)
@@ -27,6 +34,8 @@ class Player():
         print("Strength:",self.str)
         print("Dexterity", self.dex)
         print("Wisdom:",self.wis)
+        print("XP:",self.xp)
+        print("GP:",self.gp)
         print("Items in inventory:")
         for item in self.items:
             print(item.name)
@@ -74,6 +83,7 @@ class Player():
             print("Not a valid choice! Please enter N, R or P")
             self.create()
     
+
     def user_input(self, char=True, num=False):
         user_input = input(">>>:").upper()
         if num:

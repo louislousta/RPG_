@@ -1,3 +1,4 @@
+from multiprocessing.dummy import current_process
 from player import *
 from items import *
 from character import *
@@ -15,11 +16,75 @@ class Game():
         print("INSTANTIATE GRID")
         for room in rooms:
             if (player.pos_x == room.pos_x) and (player.pos_y == room.pos_y):
-                room.status()
+                print(room.name)
                 self.current_room = rooms.index(room)             
-        print("You can't go that direction!") 
+         
 
-  
+    def battle(self,player):
+        def initiative(attacker,defender):
+            atk_roll = (attacker.roll_die(100)*attacker.dex)/100
+            def_roll = (defender.roll_die(100)*defender.dex)/100
+            initiative = max(atk_roll,def_roll)
+            if initiative == atk_roll:
+                time.sleep(1)
+                print(attacker.name," has initiative")
+                return attacker
+            else:
+                time.sleep(1)
+                print(defender.name," has initiative")
+                return defender
+
+        def attack(attacker,defender):
+            print(attacker.name,"is attacking")
+            hit = (attacker.roll_die(20)*attacker.dex)/100 > defender.ar
+            if hit:
+                time.sleep(1)
+                print("A good hit!")
+                defender.hp -= attacker.dmg
+            else:
+                time.sleep(1)
+                print("Swish... missed!")
+
+        for enemy in rooms[self.current_room].enemies:
+            print("You attack ",enemy.name)
+            init = initiative(player,enemy)
+            while enemy.hp > 0:
+                if init == player:
+                    attack(player,enemy)
+                    init = enemy
+                else:
+                    attack(enemy,player)
+                    init = player
+            print("You defeated ",enemy.name)
+            self.kill(player,enemy)
+            
+    def kill(self,player,enemy):
+        print(enemy.name," has died")
+        xp = enemy.xp
+        print(f"You gained {xp} XP")
+        player.xp += xp
+        gp = enemy.gp
+        print(f"You gained {gp} GP")
+        player.gp += gp
+        for item in enemy.items:
+            print(f"{enemy.name} dropped {item.name}")
+            rooms[self.current_room].items.append(item)
+        for weapon in enemy.weapons:
+            print(f"{enemy.name} dropped {weapon.name}")
+            rooms[self.current_room].weapons.append(weapon) 
+        for armor in enemy.armors:
+            print(f"{enemy.name} dropped {armor.name}")
+            rooms[self.current_room].armors.append(armor) 
+        rooms[self.current_room].enemies.remove(enemy)
+
+
+            
+            
+
+
+
+
+
     def move(self,player):
         print("MOVE N, S, E, W. Press X to cancel")
         dir = player.user_input()
@@ -92,16 +157,18 @@ class Game():
             self.talk(player)
         elif opt == "P":
             self.pickup(player)
+        elif opt == "B":
+            self.battle(player)
         else: 
             print("Not a valid option, Enter 'H' for help")
             self.options(player)
 
     def main_loop(self,player):
         self.status()
-       # player.create()
+        player.create()
         while True:
             self.grid(player)            
-            player.status()
+            
             self.options(player)
 help = {"Move":"M","Look":"L","Talk":"T","P": "Pick up","Help":"H"}
 intro_text = ("""You wake, groaning with pain from your aching head. 
@@ -112,7 +179,7 @@ Looking around as the fog clears from your eyes you see you are in a stable,
 with thick wooden walls and straw underfoot. An old grey mule 
 observes you briefly from a corner, then goes back to eating hay. """)
 
-rooms = [start_room,courtyard]
+rooms = [start_room,courtyard,tavern,tavern_cellar]
 game = Game()
 player = Player()
 print(intro_text)

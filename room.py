@@ -38,7 +38,7 @@ class Room():
 start_room = Room("Old Stable","""
 A wooden stable. You woke up here. There is a mule in the corner eating hay, 
 a large pile of manure and a bloodstain on the floor where you were lying. The door is to the north.  
-""",0,0,[],[],[],[manure_pile],[mule],[])
+""",0,0,[],[],[],[manure_pile],[mule],[rat])
 
 courtyard = Room("Tavern Courtyard","""
 The courtyard of a tavern. The yard is paved with cobbles and filthy with mud. 
@@ -46,7 +46,7 @@ Looking up you see a clear night sky dotted with stars. To the east
 lies the tavern itself, where you can hear the sounds of drinking and merriment. 
 To the north is a high stone wall, green with moss and ivy. 
 To the west lies the open road. 
-To the south is the stable where you woke up.""",0,1,[],[short_sword],[],[],[])
+To the south is the stable where you woke up.""",0,1,[],[short_sword],[],[],[],[])
 
 tavern = Room("Tavern","""A warm, inviting tavern. The landlord stands behind the bar,
 laughing with his patrons. A roaring log fire is blazing and you instantly 
